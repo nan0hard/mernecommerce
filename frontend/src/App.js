@@ -19,6 +19,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 import UpdateProfile from "./components/User/UpdateProfile.jsx";
 import UpdatePassword from "./components/User/UpdatePassword.jsx";
 import ForgotPassword from "./components/User/ForgotPassword.jsx";
+import ResetPassword from "./components/User/ResetPassword.jsx";
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -57,6 +58,7 @@ function App() {
 						<Route path="/password/update" element={<UpdatePassword />} />
 					</Route>
 					<Route path="/password/reset" element={<ForgotPassword />} />
+					<Route path="/password/reset/:token" element={<ResetPassword />} />
 				</>
 			</Routes>
 			<Footer />

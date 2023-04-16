@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
-import { useAlert } from "react-alert";
 import { toast } from "react-toastify";
 
 import {
@@ -19,21 +18,35 @@ import "./ProductDetails.css";
 const ProductDetails = () => {
 	const dispatch = useDispatch();
 	const { id } = useParams(); // Used Params Instead of match
-	const alert = useAlert();
 
 	const { product, loading, error } = useSelector(
 		(state) => state.productDetails
 	);
 
+	const [quantity, setQuantity] = useState(1);
+
+	const increaseQuantity = () => {
+		if (product.stock <= quantity) return;
+
+		const quant = quantity + 1;
+		setQuantity(quant);
+	};
+
+	const decreaseQuantity = () => {
+		if (1 >= quantity) return;
+
+		const quant = quantity - 1;
+		setQuantity(quant);
+	};
+
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
-			// alert.error(error);
 			dispatch(clearErrors());
 		}
 
 		dispatch(getProductDetails(id));
-	}, [dispatch, id, alert, error]);
+	}, [dispatch, id, error]);
 
 	const options = {
 		edit: false,
@@ -79,9 +92,9 @@ const ProductDetails = () => {
 								<h1>{`₹ ${product.price}`}</h1>
 								<div className="detailsBlock-3-1">
 									<div className="detailsBlock-3-1-1">
-										<button>-</button>
-										<input value="1" type="number" />
-										<button>+</button>
+										<button onClick={decreaseQuantity}>-</button>
+										<input value={quantity} type="number" readOnly />
+										<button onClick={increaseQuantity}>+</button>
 									</div>
 									{""}
 									<button>Add to Cart</button>

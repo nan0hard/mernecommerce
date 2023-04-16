@@ -9,6 +9,7 @@ import {
 	clearErrors,
 	getProductDetails,
 } from "../../redux/actions/productAction";
+import { addItemsToCart } from "../../redux/actions/cartAction";
 import ReviewCard from "./ReviewCard.jsx";
 import Loader from "../layout/Loader/Loader";
 import MetaData from "../layout/MetaData";
@@ -37,6 +38,11 @@ const ProductDetails = () => {
 
 		const quant = quantity - 1;
 		setQuantity(quant);
+	};
+
+	const addToCartHandler = () => {
+		dispatch(addItemsToCart(id, quantity));
+		toast.info(`Item Added to Cart`);
 	};
 
 	useEffect(() => {
@@ -96,10 +102,9 @@ const ProductDetails = () => {
 										<input value={quantity} type="number" readOnly />
 										<button onClick={increaseQuantity}>+</button>
 									</div>
-									{""}
-									<button>Add to Cart</button>
+									<button onClick={addToCartHandler}>Add to Cart</button>
 								</div>
-								<p>Status: ""</p>
+								<p>Status:</p>
 								<b className={product.Stock < 1 ? "redColor" : "greenColor"}>
 									{product.Stock < 1 ? "Out of Stock" : "In Stock"}
 								</b>

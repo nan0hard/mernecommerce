@@ -21,6 +21,7 @@ import UpdatePassword from "./components/User/UpdatePassword.jsx";
 import ForgotPassword from "./components/User/ForgotPassword.jsx";
 import ResetPassword from "./components/User/ResetPassword.jsx";
 import Cart from "./components/Cart/Cart.jsx";
+import Shipping from "./components/Cart/Shipping.jsx";
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -57,6 +58,7 @@ function App() {
 						<Route path="/profile" element={<Profile />} />
 						<Route path="/profile/update" element={<UpdateProfile />} />
 						<Route path="/password/update" element={<UpdatePassword />} />
+						<Route path="/signin/shipping" element={<Shipping />} />
 					</Route>
 					<Route path="/password/reset" element={<ForgotPassword />} />
 					<Route path="/password/reset/:token" element={<ResetPassword />} />

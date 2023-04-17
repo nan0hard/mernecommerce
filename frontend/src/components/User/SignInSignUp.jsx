@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PasswordIcon from "@mui/icons-material/Password";
 import FaceIcon from "@material-ui/icons/Face";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
@@ -17,6 +16,7 @@ import "./SignInSignUp.css";
 const SignInSignUp = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const { loading, error, isAuthenticated } = useSelector(
 		(state) => state.user
@@ -75,6 +75,8 @@ const SignInSignUp = () => {
 		}
 	};
 
+	const redirect = location.search ? location.search.split("=")[1] : "/profile";
+
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
@@ -82,9 +84,9 @@ const SignInSignUp = () => {
 		}
 
 		if (isAuthenticated) {
-			navigate("/profile");
+			navigate(redirect);
 		}
-	}, [dispatch, error, isAuthenticated, navigate]);
+	}, [dispatch, error, isAuthenticated, navigate, redirect]);
 
 	const switchTabs = (e, tab) => {
 		if (tab === "signIn") {

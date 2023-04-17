@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 
@@ -11,9 +11,11 @@ import {
 } from "../../redux/actions/cartAction.js";
 
 import "./Cart.css";
+import MetaData from "../layout/MetaData.jsx";
 
 const Cart = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { cartItems } = useSelector((state) => state.cart);
 
 	const increaseQty = (id, quantity, stock) => {
@@ -34,8 +36,13 @@ const Cart = () => {
 		dispatch(removeItemsFromCart(id));
 	};
 
+	const checkOutHandler = () => {
+		navigate("/signin?redirect=shipping");
+	};
+
 	return (
 		<>
+			<MetaData title={`Cart -- ECOMMERCE.`} />
 			{cartItems.length === 0 ? (
 				<div className="emptyCart">
 					<RemoveShoppingCartIcon />
@@ -88,7 +95,7 @@ const Cart = () => {
 							</div>
 							<div></div>
 							<div className="checkOutBtn">
-								<button>Check Out</button>
+								<button onClick={checkOutHandler}>Check Out</button>
 							</div>
 						</div>
 					</div>

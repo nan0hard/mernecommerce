@@ -23,6 +23,8 @@ import ResetPassword from "./components/User/ResetPassword.jsx";
 import Cart from "./components/Cart/Cart.jsx";
 import Shipping from "./components/Cart/Shipping.jsx";
 import ConfirmOrder from "./components/Cart/ConfirmOrder.jsx";
+import ProcessPayment from "./components/Cart/ProcessPayment.jsx";
+import PaymentSuccess from "./components/Cart/PaymentSuccess.jsx";
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -61,7 +63,9 @@ function App() {
 						<Route path="/password/update" element={<UpdatePassword />} />
 						<Route path="/signin/shipping" element={<Shipping />} />
 						<Route path="/order/confirm" element={<ConfirmOrder />} />
+						<Route path="/process/payment" element={<ProcessPayment />} />
 					</Route>
+					<Route path="/payment/success" element={<PaymentSuccess />} />
 					<Route path="/password/reset" element={<ForgotPassword />} />
 					<Route path="/password/reset/:token" element={<ResetPassword />} />
 					<Route path="/cart" element={<Cart />} />

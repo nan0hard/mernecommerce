@@ -10,6 +10,7 @@ import { userReducer } from "./redux/reducers/userReducer.js";
 import { profileReducer } from "./redux/reducers/profileReducer.js";
 import { forgotPasswordReducer } from "./redux/reducers/forgotPasswordReducer.js";
 import { cartReducer } from "./redux/reducers/cartReducer.js";
+import { paymentReducer } from "./redux/reducers/paymentReducer.js";
 
 const reducer = combineReducers({
 	products: productReducer,
@@ -18,6 +19,7 @@ const reducer = combineReducers({
 	profile: profileReducer,
 	forgotPassword: forgotPasswordReducer,
 	cart: cartReducer,
+	payment: paymentReducer,
 });
 
 let initalState = {

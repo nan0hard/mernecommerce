@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
+import Razorpay from "razorpay";
 
 import app from "./app.js";
 import * as dotenv from "dotenv";
@@ -14,6 +15,12 @@ process.on("uncaughtException", (error) => {
 
 // Config
 dotenv.config({ path: "backend/config/.env" });
+
+// RazorPay Integration
+export const instance = new Razorpay({
+	key_id: process.env.RAZORPAY_API_KEY,
+	key_secret: process.env.RAZORPAY_API_SECRET,
+});
 
 // Connecting with DB
 connectDB();

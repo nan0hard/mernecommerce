@@ -9,6 +9,7 @@ const initialState = {
 	orderId: "",
 	orderAmount: "",
 	error: "",
+	paymentStatus: "",
 };
 
 export const paymentReducer = (state = initialState, action) => {
@@ -24,12 +25,14 @@ export const paymentReducer = (state = initialState, action) => {
 				loading: false,
 				orderId: action.payload.order.id,
 				orderAmount: action.payload.order.amount,
+				paymentStatus: action.payload.order.status,
 			};
 		case FETCH_PAYMENT_FAILURE:
 			return {
 				...state,
 				loading: false,
 				error: action.payload,
+				paymentStatus: action.payload.order.status,
 			};
 		default:
 			return state;

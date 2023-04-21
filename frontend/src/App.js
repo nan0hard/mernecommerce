@@ -61,7 +61,7 @@ function App() {
 						<Route path="/profile" element={<Profile />} />
 						<Route path="/profile/update" element={<UpdateProfile />} />
 						<Route path="/password/update" element={<UpdatePassword />} />
-						<Route path="/signin/shipping" element={<Shipping />} />
+						<Route path="/shipping" element={<Shipping />} />
 						<Route path="/order/confirm" element={<ConfirmOrder />} />
 						<Route path="/process/payment" element={<ProcessPayment />} />
 					</Route>

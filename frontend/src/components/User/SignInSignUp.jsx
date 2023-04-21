@@ -75,7 +75,9 @@ const SignInSignUp = () => {
 		}
 	};
 
-	const redirect = location.search ? location.search.split("=")[1] : "/profile";
+	const url = location.state?.pathname ? location.state.pathname : "/profile";
+
+	console.log(location);
 
 	useEffect(() => {
 		if (error) {
@@ -84,9 +86,9 @@ const SignInSignUp = () => {
 		}
 
 		if (isAuthenticated) {
-			navigate(redirect);
+			navigate(url);
 		}
-	}, [dispatch, error, isAuthenticated, navigate, redirect]);
+	}, [dispatch, error, isAuthenticated, navigate, url]);
 
 	const switchTabs = (e, tab) => {
 		if (tab === "signIn") {

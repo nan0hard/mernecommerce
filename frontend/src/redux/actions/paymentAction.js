@@ -14,12 +14,6 @@ export const processPayment =
 				data: { key },
 			} = await axios.get("/api/v1/getRazorKey");
 
-			// const { user } = useSelector((state) => state.user);
-
-			// // const {
-			// // 	shippingInfo: { mobileNo },
-			// // } = useSelector((state) => state.cart);
-
 			const { data } = await axios.post("/api/v1/payment/process", { amount });
 
 			const options = {
@@ -41,7 +35,7 @@ export const processPayment =
 					address: "Nanohard Corporation Office",
 				},
 				theme: {
-					color: "tomato",
+					color: "#FF6347",
 				},
 			};
 

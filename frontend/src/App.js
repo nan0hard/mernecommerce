@@ -24,7 +24,9 @@ import Cart from "./components/Cart/Cart.jsx";
 import Shipping from "./components/Cart/Shipping.jsx";
 import ConfirmOrder from "./components/Cart/ConfirmOrder.jsx";
 import ProcessPayment from "./components/Cart/ProcessPayment.jsx";
-import PaymentSuccess from "./components/Cart/PaymentSuccess.jsx";
+import PaymentSuccess from "./components/Order/PaymentSuccess.jsx";
+import MyOrders from "./components/Order/MyOrders.jsx";
+import OrderDetails from "./components/Order/OrderDetails.jsx";
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -64,8 +66,14 @@ function App() {
 						<Route path="/shipping" element={<Shipping />} />
 						<Route path="/order/confirm" element={<ConfirmOrder />} />
 						<Route path="/process/payment" element={<ProcessPayment />} />
+						<Route
+							path="/payment/success/:razorpay_order_id"
+							element={<PaymentSuccess />}
+						/>
+						<Route path="/myorders" element={<MyOrders />} />
+						<Route path="/myorders/order/:id" element={<OrderDetails />} />
 					</Route>
-					<Route path="/payment/success" element={<PaymentSuccess />} />
+
 					<Route path="/password/reset" element={<ForgotPassword />} />
 					<Route path="/password/reset/:token" element={<ResetPassword />} />
 					<Route path="/cart" element={<Cart />} />

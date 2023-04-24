@@ -77,8 +77,6 @@ const SignInSignUp = () => {
 
 	const url = location.state?.pathname ? location.state.pathname : "/profile";
 
-	console.log(location);
-
 	useEffect(() => {
 		if (error) {
 			toast.error(error);

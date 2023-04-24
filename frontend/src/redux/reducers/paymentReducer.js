@@ -4,15 +4,7 @@ import {
 	FETCH_PAYMENT_FAILURE,
 } from "../constants/paymentConstants";
 
-const initialState = {
-	loading: false,
-	orderId: "",
-	orderAmount: "",
-	error: "",
-	paymentStatus: "",
-};
-
-export const paymentReducer = (state = initialState, action) => {
+export const paymentReducer = (state = {}, action) => {
 	switch (action.type) {
 		case FETCH_PAYMENT_REQUEST:
 			return {

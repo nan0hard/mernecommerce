@@ -15,22 +15,42 @@ const newOrder = asyncErrorWrapper(async (req, res) => {
 		totalPrice,
 	} = req.body;
 
-	const order = await Order.create({
-		shippingInfo,
-		orderItems,
-		paymentInfo,
-		itemsPrice,
-		taxPrice,
-		shippingPrice,
-		totalPrice,
-		paidAt: Date.now(),
-		user: req.user._id,
-	});
+	try {
+		const ordercheck = await Order.findOne({
+			"paymentInfo.order_id": paymentInfo.order_id,
+			"paymentInfo.payment_id": paymentInfo.payment_id,
+		});
 
-	res.status(201).json({
-		success: true,
-		order,
-	});
+		if (ordercheck) {
+			return res.status(400).json({
+				success: false,
+				message: "Order already exists",
+			});
+		}
+
+		const order = await Order.create({
+			shippingInfo,
+			orderItems,
+			paymentInfo,
+			itemsPrice,
+			taxPrice,
+			shippingPrice,
+			totalPrice,
+			paidAt: Date.now(),
+			user: req.user._id,
+		});
+
+		res.status(201).json({
+			success: true,
+			order,
+		});
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({
+			success: false,
+			message: "Error while creating order",
+		});
+	}
 });
 
 // Get Single Order details

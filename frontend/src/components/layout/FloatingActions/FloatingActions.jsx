@@ -53,7 +53,7 @@ const FloatingActions = ({ user }) => {
 	}
 
 	function orders() {
-		navigate("/orders");
+		navigate("/myorders");
 	}
 
 	function cart() {

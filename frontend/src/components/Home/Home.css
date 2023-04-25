@@ -89,9 +89,9 @@
     align-items: center;
 }
 
-.productCard > div > span {
-    margin: 0.5vmax;
-    font: 300 0.7vmax "Roboto";
+.productCardSpan {
+    margin: 0.3vmax;
+    font: 300 0.8vmax "Roboto";
 }
 
 .productCard > p {

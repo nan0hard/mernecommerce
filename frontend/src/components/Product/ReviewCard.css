@@ -21,7 +21,7 @@
 
 .reviewCardComment {
     color: rgba(0, 0, 0, 0.445);
-    font: 300 0.8vmax cursive;
+    font: 300 1vmax cursive;
 }
 
 @media screen and (max-width : 600px) {
@@ -33,6 +33,14 @@
     .reviewCard > span {
         color: rgba(0, 0, 0, 0.552);
         font: 300 1.4vmax cursive;
+    }
+
+    .reviewCard > p {
+        font: 600 3vw "Roboto";
+    }
+
+    .reviewCardComment {
+        font: 600 3vw "Roboto";
     }
     
 }

@@ -129,7 +129,7 @@ const ProductDetails = () => {
 								<p>Product # {product._id}</p>
 							</div>
 							<div className="detailsBlock-2">
-								<Rating {...options} classNames="review-star" />
+								<Rating {...options} className="review-star" />
 								<span className="detailsBlock-2-span">
 									({product.numOfReviews} Reviews)
 								</span>
@@ -200,7 +200,9 @@ const ProductDetails = () => {
 					{product.reviews && product.reviews[0] ? (
 						<div className="reviews">
 							{product.reviews &&
-								product.reviews.map((review) => <ReviewCard review={review} />)}
+								product.reviews.map((review, index) => (
+									<ReviewCard review={review} key={index} />
+								))}
 						</div>
 					) : (
 						<p className="noReviews">Be the first one to Review this Product</p>

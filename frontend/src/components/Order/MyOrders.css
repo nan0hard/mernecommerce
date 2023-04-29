@@ -19,7 +19,7 @@
     box-sizing: border-box;
     color: white;
     transition: all 0.5s;
-    background-color: rgb(44, 44, 44);
+    background-color: rgb(44, 44, 44) !important;
 }
 
 .myOrdersTable {

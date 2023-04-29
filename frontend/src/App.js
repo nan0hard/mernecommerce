@@ -28,6 +28,10 @@ import PaymentSuccess from "./components/Order/PaymentSuccess.jsx";
 import MyOrders from "./components/Order/MyOrders.jsx";
 import OrderDetails from "./components/Order/OrderDetails.jsx";
 
+import Dashboard from "./components/Admin/Dashboard/Dashboard.jsx";
+import ProductList from "./components/Admin/ProductList/ProductList.jsx";
+import CreateProduct from "./components/Admin/CreateProduct/CreateProduct";
+
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -58,7 +62,12 @@ function App() {
 					<Route path="/search" element={<Search />} />
 					<Route path="/signin" element={<SignInSignUp />} />
 					<Route
-						element={<ProtectedRoutes isAuthenticated={isAuthenticated} />}
+						element={
+							<ProtectedRoutes
+								isAuthenticated={isAuthenticated}
+								isAdmin={false}
+							/>
+						}
 					>
 						<Route path="/profile" element={<Profile />} />
 						<Route path="/profile/update" element={<UpdateProfile />} />
@@ -72,6 +81,19 @@ function App() {
 						/>
 						<Route path="/myorders" element={<MyOrders />} />
 						<Route path="/myorders/order/:id" element={<OrderDetails />} />
+					</Route>
+
+					<Route
+						element={
+							<ProtectedRoutes
+								isAuthenticated={isAuthenticated}
+								isAdmin={true}
+							/>
+						}
+					>
+						<Route path="/admin/dashboard" element={<Dashboard />} />
+						<Route path="/admin/products" element={<ProductList />} />
+						<Route path="/admin/product/create" element={<CreateProduct />} />
 					</Route>
 
 					<Route path="/password/reset" element={<ForgotPassword />} />

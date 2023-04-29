@@ -45,7 +45,7 @@ const FloatingActions = ({ user }) => {
 	}
 
 	function dashboard() {
-		navigate("/dashboard");
+		navigate("/admin/dashboard");
 	}
 
 	function profile() {

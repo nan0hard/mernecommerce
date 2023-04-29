@@ -7,9 +7,19 @@ import {
 	PRODUCT_DETAILS_REQUEST,
 	PRODUCT_DETAILS_SUCCESS,
 	PRODUCT_DETAILS_FAIL,
+	ADMIN_PRODUCT_REQUEST,
+	ADMIN_PRODUCT_SUCCESS,
+	ADMIN_PRODUCT_FAIL,
+	CREATE_NEW_PRODUCT_REQUEST,
+	CREATE_NEW_PRODUCT_SUCCESS,
+	CREATE_NEW_PRODUCT_FAIL,
+	DELETE_PRODUCT_REQUEST,
+	DELETE_PRODUCT_SUCCESS,
+	DELETE_PRODUCT_FAIL,
 } from "../constants/productConstants";
 
-const getProduct =
+// Get all products
+export const getProduct =
 	(keyword = "", currentPage = 1, price = [0, 200000], category, ratings = 0) =>
 	async (dispatch) => {
 		try {
@@ -33,7 +43,60 @@ const getProduct =
 		}
 	};
 
-const getProductDetails = (id) => async (dispatch) => {
+// Get all products -- Admin
+export const getAdminProducts = () => async (dispatch) => {
+	try {
+		dispatch({ type: ADMIN_PRODUCT_REQUEST });
+		const { data } = await axios.get("/api/v1/admin/products");
+
+		dispatch({ type: ADMIN_PRODUCT_SUCCESS, payload: data.products });
+	} catch (error) {
+		dispatch({ type: ADMIN_PRODUCT_FAIL, payload: error.response.data.error });
+	}
+};
+
+// Create new Product --Admin
+export const createNewProduct = (productData) => async (dispatch) => {
+	try {
+		dispatch({ type: CREATE_NEW_PRODUCT_REQUEST });
+
+		const config = {
+			headers: { "Content-Type": "application/json" },
+		};
+
+		const { data } = await axios.post(
+			`/api/v1/admin/product/new`,
+			productData,
+			config
+		);
+
+		dispatch({ type: CREATE_NEW_PRODUCT_SUCCESS, payload: data });
+	} catch (error) {
+		dispatch({
+			type: CREATE_NEW_PRODUCT_FAIL,
+			payload: error.response.data.error,
+		});
+	}
+};
+
+// Delete Product --Admin
+export const deleteProduct = (id) => async (dispatch) => {
+	try {
+		dispatch({ type: DELETE_PRODUCT_REQUEST });
+
+		const { data } = await axios.delete(`/api/v1/admin/product/${id}`);
+
+		dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data.success });
+	} catch (error) {
+		dispatch({
+			type: DELETE_PRODUCT_FAIL,
+			payload: error.response.data.error,
+		});
+	}
+};
+
+// Get Product Details
+export const getProductDetails = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
@@ -50,8 +113,6 @@ const getProductDetails = (id) => async (dispatch) => {
 	}
 };
 
-const clearErrors = () => async (dispatch) => {
+export const clearErrors = () => async (dispatch) => {
 	dispatch({ type: CLEAR_ERRORS });
 };
-
-export { getProduct, clearErrors, getProductDetails };

@@ -2,19 +2,34 @@ import Product from "../mongoDB/models/productModel.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import asyncErrorWrapper from "../middleware/catchAsyncErrors.js";
 import ApiFeatures from "../utils/apiFeatures.js";
+import { v2 as cloudinary } from "cloudinary";
 
 // Create Product -- Admin
-const createProduct = asyncErrorWrapper(async (req, res, next) => {
-	const { name, price, description, category, images } = req.body;
+export const createProduct = asyncErrorWrapper(async (req, res, next) => {
+	let images = [];
 
-	const product = await Product.create({
-		name,
-		price,
-		description,
-		category,
-		images,
-		user: req.user._id,
-	});
+	if (typeof req.body.images === "string") {
+		images.push(req.body.images);
+	} else {
+		images = req.body.images;
+	}
+
+	const imagesLink = [];
+
+	for (let i = 0; i < images.length; i++) {
+		const result = await cloudinary.uploader.upload(images[i], {
+			folder: "products",
+		});
+
+		imagesLink.push({
+			public_id: result.public_id,
+			url: result.secure_url,
+		});
+	}
+
+	req.body.images = imagesLink;
+	req.body.user = req.user.id;
+	const product = await Product.create(req.body);
 	res.status(201).json({
 		success: true,
 		product,
@@ -22,7 +37,7 @@ const createProduct = asyncErrorWrapper(async (req, res, next) => {
 });
 
 // Get All Products
-const getAllProducts = asyncErrorWrapper(async (req, res, next) => {
+export const getAllProducts = asyncErrorWrapper(async (req, res, next) => {
 	// return next(new ErrorHandler(`THis is a custom error`, 500));
 	const resultPerPage = 8;
 	const productsCount = await Product.countDocuments();
@@ -46,8 +61,18 @@ const getAllProducts = asyncErrorWrapper(async (req, res, next) => {
 	});
 });
 
+// Get all Products -- Admin
+export const getAdminProducts = asyncErrorWrapper(async (req, res, next) => {
+	const products = await Product.find();
+
+	res.status(200).json({
+		success: true,
+		products,
+	});
+});
+
 // Update Product -- Admin
-const updateProduct = asyncErrorWrapper(async (req, res, next) => {
+export const updateProduct = asyncErrorWrapper(async (req, res, next) => {
 	let product = await Product.findById(req.params.id);
 
 	if (!product) {
@@ -67,11 +92,16 @@ const updateProduct = asyncErrorWrapper(async (req, res, next) => {
 });
 
 // Delete a Product -- Admin
-const deleteProduct = asyncErrorWrapper(async (req, res, next) => {
+export const deleteProduct = asyncErrorWrapper(async (req, res, next) => {
 	let product = await Product.findById(req.params.id);
 
 	if (!product) {
 		return next(new ErrorHandler("Product not found", 404));
+	}
+
+	// Deleting images from cloudinary as well
+	for (let i = 0; i < product.images.length; i++) {
+		await cloudinary.uploader.destroy(product.images[i].public_id);
 	}
 
 	await product.remove();
@@ -82,7 +112,7 @@ const deleteProduct = asyncErrorWrapper(async (req, res, next) => {
 });
 
 // Get Product details
-const getProductDetails = asyncErrorWrapper(async (req, res, next) => {
+export const getProductDetails = asyncErrorWrapper(async (req, res, next) => {
 	const product = await Product.findById(req.params.id);
 
 	if (!product) {
@@ -93,7 +123,7 @@ const getProductDetails = asyncErrorWrapper(async (req, res, next) => {
 });
 
 // Create New Review/Update
-const createProductReview = asyncErrorWrapper(async (req, res, next) => {
+export const createProductReview = asyncErrorWrapper(async (req, res, next) => {
 	const { rating, comment, productId } = req.body;
 
 	const review = {
@@ -135,7 +165,7 @@ const createProductReview = asyncErrorWrapper(async (req, res, next) => {
 });
 
 // Get all reviews of a Product
-const getProductReviews = asyncErrorWrapper(async (req, res, next) => {
+export const getProductReviews = asyncErrorWrapper(async (req, res, next) => {
 	const product = await Product.findById(req.query.id);
 
 	if (!product) {
@@ -148,7 +178,7 @@ const getProductReviews = asyncErrorWrapper(async (req, res, next) => {
 	});
 });
 
-const deleteReview = asyncErrorWrapper(async (req, res, next) => {
+export const deleteReview = asyncErrorWrapper(async (req, res, next) => {
 	const product = await Product.findById(req.query.productId);
 
 	if (!product) {
@@ -186,14 +216,3 @@ const deleteReview = asyncErrorWrapper(async (req, res, next) => {
 		success: true,
 	});
 });
-
-export {
-	createProduct,
-	getAllProducts,
-	updateProduct,
-	deleteProduct,
-	getProductDetails,
-	createProductReview,
-	getProductReviews,
-	deleteReview,
-};

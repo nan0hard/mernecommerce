@@ -3,8 +3,10 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import {
+	createProductReducer,
+	deleteProductReducer,
 	productDetailsReducer,
-	productReducer,
+	productsReducer,
 } from "./redux/reducers/productReducer.js";
 import { userReducer } from "./redux/reducers/userReducer.js";
 import { profileReducer } from "./redux/reducers/profileReducer.js";
@@ -20,7 +22,7 @@ import {
 import { newReviewReducer } from "./redux/reducers/reviewsReducer.js";
 
 const reducer = combineReducers({
-	products: productReducer,
+	products: productsReducer,
 	productDetails: productDetailsReducer,
 	user: userReducer,
 	profile: profileReducer,
@@ -32,6 +34,8 @@ const reducer = combineReducers({
 	myOrders: myOrdersReducer,
 	orderDetails: orderDetailsReducer,
 	newReview: newReviewReducer,
+	createProduct: createProductReducer,
+	deleteProduct: deleteProductReducer,
 });
 
 let initalState = {

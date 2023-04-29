@@ -7,30 +7,31 @@ import { useSelector } from "react-redux";
 import Header from "./components/layout/Header/Header";
 import Home from "./components/Home/Home";
 import Footer from "./components/layout/Footer/Footer";
-import ProductDetails from "./components/Product/ProductDetails.jsx";
-import Products from "./components/Product/Products.jsx";
-import Search from "./components/Product/Search.jsx";
+import ProductDetails from "./components/Product/ProductDetails";
+import Products from "./components/Product/Products";
+import Search from "./components/Product/Search";
 import store from "./store.js";
-import FloatingActions from "./components/layout/FloatingActions/FloatingActions.jsx";
+import FloatingActions from "./components/layout/FloatingActions/FloatingActions";
 import { loadUser } from "./redux/actions/userAction";
 import SignInSignUp from "./components/User/SignInSignUp";
-import Profile from "./components/User/Profile.jsx";
+import Profile from "./components/User/Profile";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
-import UpdateProfile from "./components/User/UpdateProfile.jsx";
-import UpdatePassword from "./components/User/UpdatePassword.jsx";
-import ForgotPassword from "./components/User/ForgotPassword.jsx";
-import ResetPassword from "./components/User/ResetPassword.jsx";
-import Cart from "./components/Cart/Cart.jsx";
-import Shipping from "./components/Cart/Shipping.jsx";
-import ConfirmOrder from "./components/Cart/ConfirmOrder.jsx";
-import ProcessPayment from "./components/Cart/ProcessPayment.jsx";
-import PaymentSuccess from "./components/Order/PaymentSuccess.jsx";
-import MyOrders from "./components/Order/MyOrders.jsx";
-import OrderDetails from "./components/Order/OrderDetails.jsx";
+import UpdateProfile from "./components/User/UpdateProfile";
+import UpdatePassword from "./components/User/UpdatePassword";
+import ForgotPassword from "./components/User/ForgotPassword";
+import ResetPassword from "./components/User/ResetPassword";
+import Cart from "./components/Cart/Cart";
+import Shipping from "./components/Cart/Shipping";
+import ConfirmOrder from "./components/Cart/ConfirmOrder";
+import ProcessPayment from "./components/Cart/ProcessPayment";
+import PaymentSuccess from "./components/Order/PaymentSuccess";
+import MyOrders from "./components/Order/MyOrders";
+import OrderDetails from "./components/Order/OrderDetails";
 
-import Dashboard from "./components/Admin/Dashboard/Dashboard.jsx";
-import ProductList from "./components/Admin/ProductList/ProductList.jsx";
+import Dashboard from "./components/Admin/Dashboard/Dashboard";
+import ProductList from "./components/Admin/ProductList/ProductList";
 import CreateProduct from "./components/Admin/CreateProduct/CreateProduct";
+import UpdateProduct from "./components/Admin/UpdateProduct/UpdateProduct";
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -94,6 +95,10 @@ function App() {
 						<Route path="/admin/dashboard" element={<Dashboard />} />
 						<Route path="/admin/products" element={<ProductList />} />
 						<Route path="/admin/product/create" element={<CreateProduct />} />
+						<Route
+							path="/admin/product/update/:id"
+							element={<UpdateProduct />}
+						/>
 					</Route>
 
 					<Route path="/password/reset" element={<ForgotPassword />} />

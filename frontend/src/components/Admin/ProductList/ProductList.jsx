@@ -22,7 +22,7 @@ const ProductList = () => {
 	const dispatch = useDispatch();
 	const { error, products } = useSelector((state) => state.products);
 	const { error: deleteError, isDeleted } = useSelector(
-		(state) => state.deleteProduct
+		(state) => state.product
 	);
 
 	const deleteProductHandler = (id) => {
@@ -56,7 +56,7 @@ const ProductList = () => {
 			renderCell: (params) => {
 				return (
 					<>
-						<Link to={`/admin/product/${params.row.id}`}>
+						<Link to={`/admin/product/update/${params.row.id}`}>
 							<EditIcon />
 						</Link>
 						<Button onClick={() => deleteProductHandler(params.row.id)}>

@@ -1,5 +1,6 @@
 .banner {
-    background-image: linear-gradient(to right, #635DC0, #3027AE);
+    /* background-image: linear-gradient(to right, #635DC0, #3027AE); */
+    background: url("../../images/cover.jfif") center / cover no-repeat;
     height: 100vmin;
     display: flex;
     flex-direction: column;

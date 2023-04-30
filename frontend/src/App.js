@@ -27,6 +27,9 @@ import ProcessPayment from "./components/Cart/ProcessPayment";
 import PaymentSuccess from "./components/Order/PaymentSuccess";
 import MyOrders from "./components/Order/MyOrders";
 import OrderDetails from "./components/Order/OrderDetails";
+import NotFound from "./components/layout/NotFound/NotFound";
+import Contact from "./components/layout/Contact/Contact";
+import About from "./components/layout/About/About";
 
 import Dashboard from "./components/Admin/Dashboard/Dashboard";
 import ProductList from "./components/Admin/ProductList/ProductList";
@@ -54,6 +57,8 @@ function App() {
 		store.dispatch(loadUser());
 	}, []);
 
+	window.addEventListener("contextmenu", (e) => e.preventDefault());
+
 	return (
 		<Router>
 			<ToastContainer />
@@ -67,6 +72,9 @@ function App() {
 					<Route path="/products/:keyword" element={<Products />} />
 					<Route path="/search" element={<Search />} />
 					<Route path="/signin" element={<SignInSignUp />} />
+					<Route path="/contact" element={<Contact />} />
+					<Route path="/about" element={<About />} />
+
 					<Route
 						element={
 							<ProtectedRoutes
@@ -114,6 +122,7 @@ function App() {
 					<Route path="/password/reset" element={<ForgotPassword />} />
 					<Route path="/password/reset/:token" element={<ResetPassword />} />
 					<Route path="/cart" element={<Cart />} />
+					<Route path="*" element={<NotFound />} />
 				</>
 			</Routes>
 			<Footer />

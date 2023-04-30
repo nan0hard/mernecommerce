@@ -8,16 +8,22 @@ import {
 	productReducer,
 	productsReducer,
 } from "./redux/reducers/productReducer.js";
-import { userReducer } from "./redux/reducers/userReducer.js";
+import {
+	allUsersReducer,
+	userDetailsReducer,
+	userReducer,
+} from "./redux/reducers/userReducer.js";
 import { profileReducer } from "./redux/reducers/profileReducer.js";
 import { forgotPasswordReducer } from "./redux/reducers/forgotPasswordReducer.js";
 import { cartReducer } from "./redux/reducers/cartReducer.js";
 import { paymentReducer } from "./redux/reducers/paymentReducer.js";
 import { paymentDetailsReducer } from "./redux/reducers/paymentDetailsReducer.js";
 import {
+	allOrdersReducer,
 	myOrdersReducer,
 	newOrderReducer,
 	orderDetailsReducer,
+	orderReducer,
 } from "./redux/reducers/orderReducer.js";
 import { newReviewReducer } from "./redux/reducers/reviewsReducer.js";
 
@@ -36,6 +42,10 @@ const reducer = combineReducers({
 	newReview: newReviewReducer,
 	createProduct: createProductReducer,
 	product: productReducer,
+	allOrders: allOrdersReducer,
+	order: orderReducer,
+	allUsers: allUsersReducer,
+	userDetails: userDetailsReducer,
 });
 
 let initalState = {

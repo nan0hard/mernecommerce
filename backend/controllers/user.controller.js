@@ -260,6 +260,9 @@ const deleteUser = asyncErrorWrapper(async (req, res, next) => {
 		);
 	}
 
+	const imageId = user.avatar.public_id;
+	await cloudinary.uploader.destroy(imageId);
+
 	await user.remove();
 
 	res.status(200).json({

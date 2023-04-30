@@ -121,9 +121,11 @@ const updateOrderStatus = asyncErrorWrapper(async (req, res, next) => {
 		return next(new ErrorHandler(`Order already delivered`, 404));
 	}
 
-	order.orderItems.forEach(async (ord) => {
-		await updateStock(ord.product, ord.quantity);
-	});
+	if (req.body.status === "Shipped") {
+		order.orderItems.forEach(async (ord) => {
+			await updateStock(ord.product, ord.quantity);
+		});
+	}
 
 	order.orderStatus = req.body.status;
 

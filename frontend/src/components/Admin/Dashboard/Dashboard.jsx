@@ -9,10 +9,12 @@ import Sidebar from "../Sidebar/Sidebar.jsx";
 import { getAdminProducts } from "../../../redux/actions/productAction.js";
 
 import "./Dashboard.css";
+import { getAllOrders } from "../../../redux/actions/orderAction.js";
 
 const Dashboard = () => {
 	const dispatch = useDispatch();
 	const { products } = useSelector((state) => state.products);
+	const { orders } = useSelector((state) => state.allOrders);
 
 	let outOfStock = 0;
 
@@ -25,6 +27,7 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		dispatch(getAdminProducts());
+		dispatch(getAllOrders());
 	}, [dispatch]);
 
 	const lineState = {
@@ -60,7 +63,7 @@ const Dashboard = () => {
 						<div>
 							<p>
 								Total Amount
-								<br /> $2000
+								<br /> ₹2000
 							</p>
 						</div>
 						<div className="dashboardSummaryBox2">
@@ -70,7 +73,7 @@ const Dashboard = () => {
 							</Link>
 							<Link to="/admin/orders">
 								<p>Orders</p>
-								<p>4</p>
+								<p>{orders && orders.length}</p>
 							</Link>
 							<Link to="/admin/users">
 								<p>Users</p>

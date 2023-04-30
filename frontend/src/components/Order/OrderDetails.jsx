@@ -16,17 +16,16 @@ const OrderDetails = () => {
 	const { loading, error, order } = useSelector((state) => state.orderDetails);
 
 	useEffect(() => {
-		getOrderDetails(id, dispatch).then((res) => {
-			if (res.failure) {
-				toast.error(res.failure);
-				dispatch(clearErrors());
-			}
-		});
-	}, []);
+		if (error) {
+			toast.error(error);
+			dispatch(clearErrors());
+		}
+
+		dispatch(getOrderDetails(id));
+	}, [error, id, dispatch]);
 
 	return (
 		<>
-			{loading.toString()}
 			<MetaData title={"Order Details"} />
 			{loading ? (
 				<Loader />

@@ -36,6 +36,7 @@ import OrderList from "./components/Admin/OrderList/OrderList";
 import ProcessOrder from "./components/Admin/ProcessOrder/ProcessOrder";
 import UsersList from "./components/Admin/UsersList/UsersList";
 import UpdateUser from "./components/Admin/UpdateUser/UpdateUser";
+import ProductReviews from "./components/Admin/ProductReviews/ProductReviews.jsx";
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -107,6 +108,7 @@ function App() {
 						<Route path="/admin/order/update/:id" element={<ProcessOrder />} />
 						<Route path="/admin/users" element={<UsersList />} />
 						<Route path="/admin/user/update/:id" element={<UpdateUser />} />
+						<Route path="/admin/reviews" element={<ProductReviews />} />
 					</Route>
 
 					<Route path="/password/reset" element={<ForgotPassword />} />

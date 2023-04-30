@@ -26,6 +26,8 @@ import {
 	orderReducer,
 } from "./redux/reducers/orderReducer.js";
 import { newReviewReducer } from "./redux/reducers/reviewsReducer.js";
+import { productReviewsReducer } from "./redux/reducers/reviewsReducer.js";
+import { reviewReducer } from "./redux/reducers/reviewsReducer.js";
 
 const reducer = combineReducers({
 	products: productsReducer,
@@ -46,6 +48,8 @@ const reducer = combineReducers({
 	order: orderReducer,
 	allUsers: allUsersReducer,
 	userDetails: userDetailsReducer,
+	productReviews: productReviewsReducer,
+	review: reviewReducer,
 });
 
 let initalState = {

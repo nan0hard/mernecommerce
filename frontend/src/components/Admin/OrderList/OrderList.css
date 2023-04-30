@@ -58,6 +58,9 @@
 
 
 @media screen and (max-width: 600px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
     .orderListTable div {
         font: 300 4vw "Roboto";
     }

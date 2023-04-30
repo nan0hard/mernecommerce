@@ -32,9 +32,10 @@ import Dashboard from "./components/Admin/Dashboard/Dashboard";
 import ProductList from "./components/Admin/ProductList/ProductList";
 import CreateProduct from "./components/Admin/CreateProduct/CreateProduct";
 import UpdateProduct from "./components/Admin/UpdateProduct/UpdateProduct";
-import OrderList from "./components/Admin/OrderList/OrderList.jsx";
-import ProcessOrder from "./components/Admin/ProcessOrder/ProcessOrder.jsx";
-import UsersList from "./components/Admin/UsersList/UsersList.jsx";
+import OrderList from "./components/Admin/OrderList/OrderList";
+import ProcessOrder from "./components/Admin/ProcessOrder/ProcessOrder";
+import UsersList from "./components/Admin/UsersList/UsersList";
+import UpdateUser from "./components/Admin/UpdateUser/UpdateUser";
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -105,6 +106,7 @@ function App() {
 						<Route path="/admin/orders" element={<OrderList />} />
 						<Route path="/admin/order/update/:id" element={<ProcessOrder />} />
 						<Route path="/admin/users" element={<UsersList />} />
+						<Route path="/admin/user/update/:id" element={<UpdateUser />} />
 					</Route>
 
 					<Route path="/password/reset" element={<ForgotPassword />} />

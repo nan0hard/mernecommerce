@@ -10,11 +10,13 @@ import { getAdminProducts } from "../../../redux/actions/productAction.js";
 
 import "./Dashboard.css";
 import { getAllOrders } from "../../../redux/actions/orderAction.js";
+import { getAllUsers } from "../../../redux/actions/userAction.js";
 
 const Dashboard = () => {
 	const dispatch = useDispatch();
 	const { products } = useSelector((state) => state.products);
 	const { orders } = useSelector((state) => state.allOrders);
+	const { users } = useSelector((state) => state.allUsers);
 
 	let outOfStock = 0;
 
@@ -28,6 +30,7 @@ const Dashboard = () => {
 	useEffect(() => {
 		dispatch(getAdminProducts());
 		dispatch(getAllOrders());
+		dispatch(getAllUsers());
 	}, [dispatch]);
 
 	const lineState = {
@@ -77,7 +80,7 @@ const Dashboard = () => {
 							</Link>
 							<Link to="/admin/users">
 								<p>Users</p>
-								<p>4</p>
+								<p>{users && users.length}</p>
 							</Link>
 						</div>
 					</div>

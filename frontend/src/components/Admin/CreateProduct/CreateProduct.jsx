@@ -6,6 +6,7 @@ import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import DescriptionIcon from "@mui/icons-material/Description";
 import StorageIcon from "@mui/icons-material/Storage";
 import SpellcheckIcon from "@mui/icons-material/Spellcheck";
+import { useNavigate } from "react-router-dom";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 
 import {
@@ -21,6 +22,7 @@ import "./CreateProduct.css";
 
 const CreateProduct = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const { loading, error, success } = useSelector(
 		(state) => state.createProduct
@@ -51,9 +53,10 @@ const CreateProduct = () => {
 
 		if (success) {
 			toast.success(`Product Created Successfully`);
+			navigate("/admin/products");
 			dispatch({ type: CREATE_NEW_PRODUCT_RESET });
 		}
-	}, [dispatch, error, success]);
+	}, [dispatch, error, success, navigate]);
 
 	const createProductSubmitHandler = (e) => {
 		e.preventDefault();

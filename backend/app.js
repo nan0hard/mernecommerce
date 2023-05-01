@@ -1,9 +1,9 @@
 import cookieParser from "cookie-parser";
 import express from "express";
+import path from "path";
 const app = express();
 
 import * as dotenv from "dotenv";
-import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
 
 import errorMiddleware from "./middleware/error.js";
@@ -27,6 +27,10 @@ app.use("/api/v1", user);
 app.use("/api/v1", order);
 app.use("/api/v1", payments);
 
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.get("*", (req, res) => {
+	res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+});
 // Middleware for errors
 app.use(errorMiddleware);
 

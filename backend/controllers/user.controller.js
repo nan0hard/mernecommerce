@@ -81,7 +81,9 @@ const forgotPassword = asyncErrorWrapper(async (req, res, next) => {
 	// )}/api/v1/password/reset/${resetToken}`;
 
 	// This is temporary for frontend display
-	const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+	const resetPasswordUrl = `${req.protocol}://${req.get(
+		"host"
+	)}/password/reset/${resetToken}`;
 
 	const message = `Your password reset token in :- \n\n ${resetPasswordUrl} \n\n If you have not requested this email then, Please ignore this email`;
 

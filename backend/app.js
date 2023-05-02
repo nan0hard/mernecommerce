@@ -1,6 +1,6 @@
 import cookieParser from "cookie-parser";
 import express from "express";
-import path from "path";
+import * as path from "path";
 const app = express();
 
 import * as dotenv from "dotenv";
@@ -26,6 +26,8 @@ app.use("/api/v1", product);
 app.use("/api/v1", user);
 app.use("/api/v1", order);
 app.use("/api/v1", payments);
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 app.get("*", (req, res) => {
